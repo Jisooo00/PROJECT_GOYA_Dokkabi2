@@ -40,7 +40,7 @@ public class ImpelementMap : MonoBehaviour
         {
 
             AudioManager.Instance.PlayClick();
-            PopupManager.Instance.OpenPopupNotice("개발진행중\n완료예정일 : 3월 1일");
+            PopupManager.Instance.OpenPopupItem();
 
         });
         

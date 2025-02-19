@@ -159,6 +159,19 @@ public class PopupManager : MonoBehaviour
         SetOpenPopup(popupSetNickname);
     }
     
+    public void OpenPopupItem(Action del = null, int idx = 0)
+    {
+        var go = Load("Prefabs/UI/UIPopupItem", m_rectTransform);
+        var popupItem= go.GetComponent<UIPopupItem>();
+        popupItem.Init(delegate
+        {
+            if (del != null)
+                del();
+        },"","",idx);
+        popupItem.gameObject.SetActive(true);
+        SetOpenPopup(popupItem);
+    }
+    
     public void OpenPopupMiniGameTest(Action del = null)
     {
         var go = Load("Prefabs/UI/UIPopupMiniGameTest", m_rectTransform);
