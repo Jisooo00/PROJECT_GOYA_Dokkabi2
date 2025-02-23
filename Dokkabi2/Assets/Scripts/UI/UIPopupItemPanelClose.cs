@@ -7,7 +7,7 @@ using UnityEngine.UI;
 
 public class UIPopupItemPanelClose : UIPopupItemPanel
 { 
-    public void Init()
+    public override void Init()
     {
     }
 

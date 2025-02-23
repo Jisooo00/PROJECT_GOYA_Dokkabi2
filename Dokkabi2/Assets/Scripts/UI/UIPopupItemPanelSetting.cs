@@ -52,7 +52,7 @@ public class UIPopupItemPanelSetting : UIPopupItemPanel
         m_textVersion.text = String.Format("VERSION {0}",Application.version);
     }
 
-    public void Init()
+    public override void Init()
     {
         mSliderVol.onValueChanged.AddListener(delegate { AudioManager.Instance.SetVolumeCheck(mSliderVol.value); });
         mSliderCam.onValueChanged.AddListener(delegate { m_textSetCam.text = mSliderCam.value.ToString();});
