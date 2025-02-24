@@ -6,47 +6,45 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class UIPopupItemPanelItems : UIPopupItemPanel
+public class UIPopupItemPanelDiary : UIPopupItemPanel
 {
     public List<GameObject> _slotsList = new List<GameObject>();
-    public List<ItemUI> _itemButtons = new List<ItemUI>();
+    public List<DiaryUI> _diaryButtons = new List<DiaryUI>();
 
     [Serializable]
-    public class ItemUI
+    public class DiaryUI
     {
-        private GameData.ItemData _data;
+        private GameData.DiaryData _data;
         public Button _btn;
-        public TMP_Text _txtCnt;
         public GameObject _obj;
 
-        public void Init(GameData.ItemData data)
+        public void Init(GameData.DiaryData data)
         {
             _data = data;
-            _txtCnt.text = _data._count.ToString();
             _btn.onClick.AddListener(delegate
             {
                 AudioManager.Instance.PlayClick();
-                PopupManager.Instance.OpenPopupItemDetail(null,(int)_data._type);
+                PopupManager.Instance.OpenPopupItemDiary(null,(int)_data._index);
             });
         }
         
     }
     public override void Init()
     {
-        SetItems();
+        SetDiary();
         
     }
 
-    public void SetItems()
+    public void SetDiary()
     {
-        var Items = GameData.myData.userItems;
-        for (int i = 0; i < Items.Count; i++)
+        var Diary = GameData.myData.userDiary;
+        for (int i = 0; i < Diary.Count; i++)
         {
-            var item = Items[i];
-            int idx = (int)item._type;
-            if (i >= _slotsList.Count || idx >= _itemButtons.Count) break;
-            var btn = _itemButtons[idx];
-            btn.Init(item);
+            var diary = Diary[i];
+            int idx = (int)diary._index;
+            if (i >= _slotsList.Count || idx >= _diaryButtons.Count) break;
+            var btn = _diaryButtons[idx];
+            btn.Init(diary);
 		
             var tm = btn._obj.GetComponent<RectTransform>();
             tm.SetParent(_slotsList[i].transform, false);

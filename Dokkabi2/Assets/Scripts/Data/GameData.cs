@@ -170,6 +170,57 @@ public static class GameData
     }
 
     #endregion
+
+    #region ItemData
+
+    public class ItemData
+    {
+        public int _count;
+        public string _name;
+        public string _desc;
+        public ItemType _type;
+        
+        public enum ItemType
+        {
+            None = -1,
+            Cloth = 0,
+            Glue = 1,
+            End = 2,
+        }
+        public ItemData(ItemType type, string name, string desc, int count)
+        {
+            _type = type;
+            _count = count;
+            _name = name;
+            _desc = desc;
+        }
+    }
+    #endregion
+    
+    #region ItemData
+
+    public class DiaryData
+    {
+        public string _title;
+        public string _desc;
+        public DiaryIndex _index;
+        
+        public enum DiaryIndex
+        {
+            None = -1,
+            DIARY_01 = 0,
+            End = 1,
+        }
+        public DiaryData(DiaryIndex index, string title, string desc)
+        {
+            _index = index;
+            _title = title;
+            _desc = desc;
+        }
+    }
+    
+
+    #endregion
     
     #region userData
     public class UserData
@@ -181,6 +232,9 @@ public static class GameData
         public string cur_map = "";
         //public string cur_quest = "";
         //public Vector3 cur_pos = Vector3.zero;
+        
+        public List<ItemData> userItems = new List<ItemData>();
+        public List<DiaryData> userDiary = new List<DiaryData>();
     
         public bool IS_BGM_ON = true;
         public bool IS_EFFECT_ON = true;
@@ -414,6 +468,26 @@ public static class GameData
     }
     #endregion
 
+    public static bool IsEndItemIdx(int idx)
+    {
+        return (ItemData.ItemType)idx == ItemData.ItemType.End ;
+    }
+        
+    public static bool IsNoneItemIdx(int idx)
+    {
+        return (ItemData.ItemType)idx == ItemData.ItemType.None ;
+    }
+    
+    public static bool IsEndDiaryIdx(int idx)
+    {
+        return (DiaryData.DiaryIndex)idx == DiaryData.DiaryIndex.End ;
+    }
+        
+    public static bool IsNoneDiaryIdx(int idx)
+    {
+        return (DiaryData.DiaryIndex)idx == DiaryData.DiaryIndex.None ;
+    }
+    
     public static QuestData GetQuestData(string id)
     {
         if (QuestDatas.ContainsKey(id))
@@ -520,6 +594,21 @@ public class Global
         if (PlayerPrefs.HasKey(KEY_JOYSTICK_FLAG))
             GameData.myData.IS_HIDE_JOYSTICK = Convert.ToBoolean(PlayerPrefs.GetString(KEY_JOYSTICK_FLAG));
 
+    }
+
+    public static void InitItems()
+    {
+        var item1 = new GameData.ItemData(GameData.ItemData.ItemType.Cloth,"무명", "청포전에서 구매한 무명. 베틀로 짠 천으로 탈의 뒤를 덧대는데 필요한 재료이다.", 1);
+        var item2 = new GameData.ItemData(GameData.ItemData.ItemType.Glue,"아교", "점성이 있는 물체로 주로 접착제의 용도로 쓰인다.", 2);
+        
+        GameData.myData.userItems.Add(item1);
+        GameData.myData.userItems.Add(item2);
+    }
+
+    public static void InitDiary()
+    {
+        var Diary1 = new GameData.DiaryData(GameData.DiaryData.DiaryIndex.DIARY_01,"<곽씨를 만나다>", "이야기꾼 김서방이 일기 쓰는 방법을 알려주었다.");
+        GameData.myData.userDiary.Add(Diary1);
     }
 
     public static void InitUserData()

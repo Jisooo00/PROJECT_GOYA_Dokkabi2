@@ -172,6 +172,33 @@ public class PopupManager : MonoBehaviour
         SetOpenPopup(popupItem);
     }
     
+    public void OpenPopupItemDetail(Action del = null, int idx = 0)
+    {
+        var go = Load("Prefabs/UI/UIPopupItemDetail", m_rectTransform);
+        var popupItemDetail= go.GetComponent<UIPopupItemDetail>();
+        popupItemDetail.Init(delegate
+        {
+            if (del != null)
+                del();
+        },"","",idx);
+        popupItemDetail.gameObject.SetActive(true);
+        SetOpenPopup(popupItemDetail);
+    }
+
+    public void OpenPopupItemDiary(Action del = null, int idx = 0)
+    {
+        var go = Load("Prefabs/UI/UIPopupDiaryDetail", m_rectTransform);
+        var popupDiaryDetail= go.GetComponent<UIPopupDiaryDetail>();
+        popupDiaryDetail.Init(delegate
+        {
+            if (del != null)
+                del();
+        },"","",idx);
+        popupDiaryDetail.gameObject.SetActive(true);
+        SetOpenPopup(popupDiaryDetail);
+    }
+
+    
     public void OpenPopupMiniGameTest(Action del = null)
     {
         var go = Load("Prefabs/UI/UIPopupMiniGameTest", m_rectTransform);

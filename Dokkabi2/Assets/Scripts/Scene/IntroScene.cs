@@ -68,6 +68,8 @@ public class IntroScene : BaseScene
         
         Global.InitSoundSet();
         Global.InitUISet();
+        Global.InitItems();
+        Global.InitDiary();
         
         mTxtVersion.text = String.Format("version {0}",Application.version);
         
