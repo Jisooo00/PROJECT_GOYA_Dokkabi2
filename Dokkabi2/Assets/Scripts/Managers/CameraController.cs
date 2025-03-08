@@ -20,9 +20,12 @@ public class CameraController : MonoBehaviour
     private float mHeight;
     private float mWidth;
 
+    public Player_ _player;
+    
+
     private void Awake()
     {
-        transform.position = Player.instance.rb.position;
+        transform.position = _player.rb.position;
     }
 
     void Start()
@@ -41,9 +44,9 @@ public class CameraController : MonoBehaviour
 
     void LimitCameraArea()
     {
-        var PlayerPos = Player.instance.rb.position;
+        var PlayerPos = _player.rb.position;
         Vector3 v3NewPos = new Vector3(PlayerPos.x, PlayerPos.y, -10);
-        transform.position = Vector3.Lerp(transform.position,v3NewPos,Time.deltaTime*GameData.myData.SET_CAM);
+        transform.position = Vector3.Lerp(transform.position,v3NewPos,Time.deltaTime*10);
         
         float lx = mMapSize.x - mWidth;
         float clampX = Mathf.Clamp(transform.position.x, -lx + mCenter.x, lx + mCenter.x);
